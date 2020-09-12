@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import 'bootstrap';
+
+.管理者ログイン{
+	margin-bottom: 30px;
+}
+
+span{
+	background-color: #EEEEEE;
+}
