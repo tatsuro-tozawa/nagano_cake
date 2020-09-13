@@ -16,10 +16,23 @@
 @import "bootstrap-sprockets";
 @import 'bootstrap';
 
-.管理者ログイン{
-	margin-bottom: 30px;
+
+.box1{
+	margin-bottom: 70px;
 }
 
 span{
 	background-color: #EEEEEE;
+}
+
+body{
+	padding-top: 70px;
+}
+
+.nav-link {
+  color: white;
+}
+
+.green-back{
+	background-color: #00CC00
 }
