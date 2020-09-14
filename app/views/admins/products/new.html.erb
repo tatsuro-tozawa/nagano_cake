@@ -1,0 +1,40 @@
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box1">
+					<h3><span>商品新規登録</span></h3>
+				</div>
+			</div>
+		</div>
+		<%= form_for(@product, url: new_admins_product_path) do |f| %>
+		<div class="row">
+			<div class="col-md-offset-1 col-md-3">
+				<%= f.attachment_field :image %>
+			</div>
+				<div class="col-md-offset-1 col-md-5">
+			        <div class="form-group">
+			        	<h5>商品名</h5>
+						<%= f.text_field :name, autofoucus: true, class: "form-contral" %>
+					</div>
+					<div class="form-group">
+						<h5>商品説明</h5>
+						<%= f.text_area :introduction, autofoucus: true, class: "form-contral" %>
+					</div>
+					<div class="form-group">
+						<h5>ジャンル</h5>
+						<%= f.select :genre, [["ケーキ", "ケーキ"], ["プリン", "プリン"],["焼き菓子", "焼き菓子"],["キャンディ", "キャンディ"]], include_blank: "選択して下さい" %>
+					</div>
+					<div class="form-group">
+						<h5>税込価格</h5>
+						<%= f.text_field :price, autofoucus: true, class: "form-contral" %>
+					</div>
+					<div class="form-group">
+						<h5>販売ステータス</h5>
+						<%= f.select :is_active, [["販売中", "販売中"], ["売り切れ", "売り切れ"]], include_blank: "選択して下さい" %>
+					</div>
+				</div>
+		</div>
+		<% end %>
+	</div>
+</div>
