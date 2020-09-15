@@ -12,14 +12,18 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label class="contral-label" for="name">ジャンル</label>
-						<%= f.text_field :name, autofoucus: true, class: "form-contral col-md" %>
+						<%= f.text_field :name, autofoucus: true, class: "form-control col-md" %>
 					</div>
 				</div>
-				<div class="col-md-1">
-					<input type="radio" name="is_active" value="有効">有効
-				</div>
-				<div class="col-md-1">
-					<input type="radio" name="is_active" value="無効">無効
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="radio-inline">
+							<input type="radio" name="is_active" value="有効">有効
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="is_active" value="無効">無効
+						</label>
+					</div>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group">
