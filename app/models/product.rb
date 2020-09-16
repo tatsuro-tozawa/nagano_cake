@@ -6,5 +6,6 @@ class Product < ApplicationRecord
 	validates :introduction, presence: true, length: {maximum:250,minimum:2}
 	validates :price, presence: true
 	validates :is_active, presence: true
+	validates :image, presence: true
 
 end
