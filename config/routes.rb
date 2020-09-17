@@ -10,5 +10,11 @@ Rails.application.routes.draw do
     resources :products, only: [:new, :create, :show, :index, :edit, :update]
   end
 
+  devise_for :clients
+
+  namespace :clients do
+    get 'homes/top' => 'homes#top', as:'top'
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

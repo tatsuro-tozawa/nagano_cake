@@ -1,0 +1,2 @@
+module Clienst::HomesHelper
+end

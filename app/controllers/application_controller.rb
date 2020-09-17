@@ -15,5 +15,5 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resouse)
   	admin_session_path
   end
-  
+
 end
