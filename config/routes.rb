@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     get 'homes/top' => 'homes#top', as:'top'
+    resources :clients, only: [:index, :edit, :show, :update]
     resources :genres, only: [:new, :create, :edit, :update]
     resources :products, only: [:new, :create, :show, :index, :edit, :update]
   end
@@ -25,8 +26,11 @@ Rails.application.routes.draw do
     get 'homes/about' => 'homes#about', as:'client_about'
 
     get 'mypage/edit' => 'edit'
+    patch 'mypage' => 'mypage#update'
     get 'mypage/show' => 'show'
-    get 'withdraw'
+    get 'mypage/withdraw' => 'withdraw'
+    patch 'mypage/withdraw_status' => 'mypage#withdraw_status'
+    resources :addresses, only: [:new, :create, :edit, :update, :destroy]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

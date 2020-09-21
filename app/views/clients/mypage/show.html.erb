@@ -1,1 +1,78 @@
-<h2><%= current_client.last_name %></h2>
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box2">
+					<h3><span>マイページ</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+					<h4><strong>登録情報</strong></h4>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<%= link_to "編集する", clients_mypage_edit_path, class: "btn btn-primary form-control" %>
+			</div>
+			<div class="col-md-3">
+				<%= link_to "パスワードを変更する", "#", class: "btn btn-primary form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<table class="table table-bordered">
+					<tr>
+						<td class="active">氏名</td>
+						<td><%= current_client.last_name %> <%= current_client.first_name %></td>
+					</tr>
+					<tr>
+						<td class="active">カナ</td>
+						<td><%= current_client.last_name_kana %> <%= current_client.first_name_kana %></td>
+					</tr>
+					<tr>
+						<td class="active">郵便番号</td>
+						<td><%= current_client.postcode %></td>
+					</tr>
+					<tr>
+						<td class="active">住所</td>
+						<td><%= current_client.address %></td>
+					</tr>
+					<tr>
+						<td class="active">電話番号</td>
+						<td><%= current_client.telephone_number %></td>
+					</tr>
+					<tr>
+						<td class="active">メールアドレス</td>
+						<td><%= current_client.email %></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+					<h4><strong>配送先</strong></h4>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<%= link_to "一覧を見る", new_clients_address_path, class: "btn btn-primary form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+					<h4><strong>注文履歴</strong></h4>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<%= link_to "一覧を見る", "#", class: "btn btn-primary form-control" %>
+			</div>
+		</div>
+	</div>
+</div>

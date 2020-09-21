@@ -1,6 +1,9 @@
 class Client < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  has_many :addresses
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -12,6 +15,10 @@ class Client < ApplicationRecord
   validates :postcode, length: {minimum: 3, maximum: 10}
   validates :address, length: {minimum: 3, maximum: 50}
   validates :telephone_number, length: {minimum: 3, maximum: 15}
-  validates :password, presence: true, length: {minimum: 6}
+
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
 
 end
+

@@ -1,0 +1,83 @@
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box2">
+					<h3><span>登録情報編集</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<%= form_with(model: @client, url:clients_mypage_path, method: :patch, local: true) do |f| %>
+			<div class="col-md-12">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2 text-left">
+                            <p><strong>名前</strong></p>
+                        </div>
+                        <label for="last_name" class="col-md-1 control-label">(姓)</label>
+                        <div class="col-md-3">
+                            <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+                        </div>
+                        <label for="first_name" class="col-md-1 control-label">(名)</label>
+                        <div class="col-md-3">
+                            <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2 text-left">
+                            <p><strong>フリガナ</strong></p>
+                        </div>
+                        <label for="last_name_kana" class="col-md-1 control-label">(セイ)</label>
+                        <div class="col-md-3">
+                            <%= f.text_field :last_name_kana, autofocus: true, class: "form-control" %>
+                        </div>
+                        <label for="first_name_kana" class="col-md-1 control-label">(メイ)</label>
+                        <div class="col-md-3">
+                            <%= f.text_field :first_name_kana, autofocus: true, class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-md-2 text-left">メールアドレス</label>
+                        <div class="col-md-offset-1 col-md-3">
+	                         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postcode" class="col-md-2 text-left">郵便番号(ハイフンなし)</label>
+                        <div class="col-md-offset-1 col-md-3">
+	                         <%= f.text_field :postcode, autofocus: true, class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="col-md-2 text-left">住所</label>
+                        <div class="col-md-offset-1 col-md-6">
+	                         <%= f.text_field :address, autofocus: true, class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telephone_number" class="col-md-2 text-left">電話番号(ハイフンなし)</label>
+                        <div class="col-md-offset-1 col-md-3">
+	                         <%= f.text_field :telephone_number, autofocus: true, class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="row">
+			             <div class="col-md-offset-3 col-md-2">
+			                <%= f.submit "編集を登録する", class: "btn btn-primary form-control" %>
+			             </div>
+			             <div class="col-md-offset-1 col-md-2">
+			             	<%= link_to "退会する", clients_mypage_withdraw_path, class: "btn btn-danger form-control" %>
+			        <% end %>
+		            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box2">
+					<h3><span>配送先登録/一覧</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<%= form_with(model: @address, url:clients_addresses_path, local: true) do |f| %>
+			<div class="col-md-10">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label for="postcode" class="col-md-3 text-left">郵便番号(ハイフンなし)</label>
+						<div class="col-md-3">
+							<%= f.text_field :postcode, class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="address" class="col-md-3 text-left">住所</label>
+						<div class="col-md-6">
+							<%= f.text_field :address, class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="name" class="col-md-3 text-left">宛名</label>
+						<div class="col-md-3">
+							<%= f.text_field :name, class: "form-control" %>
+						</div>
+						<div class="col-md-offset-3 col-md-2">
+							<%= f.submit '登録する', class: "btn btn-success form-control" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-10">
+				<table class="table table-bordered">
+					<thead>
+						<tr class="active">
+							<th>郵便番号</th>
+							<th>住所</th>
+							<th>宛名</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					<% @addresses.each do |address| %>
+						<tr>
+							<td><%= address.postcode %></td>
+							<td><%= address.address %></td>
+							<td><%= address.name %></td>
+							<!-- 編集ボタンと削除ボタン追加 -->
+							<td></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -8,8 +8,9 @@
             </div>
         </div>
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="row">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= render 'devise/shared/error_messages', resource: resource %>
             <div class="col-md-offset-2 col-md-10">
                 <div class="form-horizontal">
                     <div class="form-group">
@@ -23,6 +24,12 @@
                         <label for="password" class="col-md-2 text-right">パスワード</label>
                         <div class="col-md-offset-1 col-md-5">
                           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-5">
+                            <%= link_to "=>パスワードを忘れた方はこちら", new_password_path(resource_name) %>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
+
+  before_action :authenticate_admin!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def after_sign_in_path_for(resouse)
+    admins_top_path
+  end
+
+  def after_sign_out_path_for(resouse)
+    admin_session_path
+  end
+
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
