@@ -1,0 +1,13 @@
+<div class="col-lg-10 space">
+  	<div class="container">
+  	<h2><%= @genre.name %>一覧（全<%= @genre.products.count %>種）</h2>
+	</div>
+
+	<div class="container">
+    	<% @genre.products.each do |gp| %>
+    		<%= render 'products/box', product: gp %>
+    	<% end %>
+  	</div>
+</div>
+<%= render 'genres/index', genres: @genres %>
+
