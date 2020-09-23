@@ -1,0 +1,29 @@
+<%= render 'clients/genres/index', genres: @genres %>
+<div class="col-md-10 space">
+<div class="container">
+	<div class="row">
+		<div class="com-md-10">
+			<div class="text-center" style="padding:10px;"><br><br>
+				<h4>
+					ようこそ、NaganoCakeへ！<br><br>
+					このサイトは、ケーキ販売のECサイトになります。<br><br>
+					会員でない方も商品の閲覧はできますが、<br><br>
+					購入には会員登録が必要になります。<br><br>
+				</h4>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div style="padding:10px;">
+				<h3><strong>オススメ商品</strong></h3>
+			</div>
+			<% @products.each do |product| %>
+            	<%= render 'clients/products/box', product: product %>
+        	<% end %>
+        	<%= paginate @products %>
+    	</div>
+    </div>
+</div>
+

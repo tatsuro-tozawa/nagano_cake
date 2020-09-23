@@ -19,7 +19,7 @@ class Clients::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(resouse)
-    clients_client_top_path
+    clients_products_path
   end
 
   def after_sign_out_path_for(resouse)

@@ -1,39 +1,46 @@
-<body>
+<header class="container-fluid">
 	<nav class="navbar navbar-default">
-		<div class="container">
-			<div class="navbar-header">
-				<div>
-					<h2>LOGO</h2>
-				</div>
-			</div>
+		<div>
+			<h1>LOGO</h1>
+		</div>
 
+		<div class="collapse navbar-collapse">
 			<nav>
 				<ul class="nav navbar-nav navbar-right">
 				<!-- 管理者 -->
 				<% if admin_signed_in? %>
-				<li class="nav-item"><%= link_to "商品一覧", admins_products_path, class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to "会員一覧", "#", class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to "注文履歴一覧", "#", class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to "ジャンル一覧", new_admins_genre_path, class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %></li>
+					<div class="admin-message">管理者としてログインしています</div>
+					<li class="nav-item"><%= link_to "商品一覧", admins_products_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to "会員一覧", "#", class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to "注文履歴一覧", "#", class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to "ジャンル一覧", new_admins_genre_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %></li>
 
 				<!-- 顧客 -->
 				<% elsif client_signed_in? %>
-				<li class="nav-item"><%= link_to 'マイページ', clients_mypage_show_path, class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to '商品一覧', clients_products_path, class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to 'カート', "#", class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to 'ログアウト', destroy_client_session_path, method: :delete, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'マイページ', clients_mypage_show_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to '商品一覧', clients_products_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'カート', "#", class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'ログアウト', destroy_client_session_path, method: :delete, class: "nav-link" %></li>
 
 				<!-- 非ログイン -->
 				<% else %>
-				<li class="nav-item"><%= link_to 'About', clients_client_about_path, class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to '商品一覧', "#", class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to '新規登録', "#", class: "nav-link" %></li>
-				<li class="nav-item"><%= link_to 'ログイン', "#",class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'About', clients_client_about_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to '商品一覧', clients_products_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to '新規登録', new_client_registration_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'ログイン', new_client_session_path, class: "nav-link" %></li>
 				<% end %>
 			    </ul>
 
+			    <% if client_signed_in? %>
+			    	<p>ようこそ<%= current_client.full_name %>さん!</p>
+			    <% else admin_signed_in? %>
+			    	<form class="form-inline my-2 my-lg-0">
+        				<input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
+        				<button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+        			</form>
+      			<% end %>
 			</nav>
 		</div>
 	</nav>
-</body>
+</header>

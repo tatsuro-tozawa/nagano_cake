@@ -1,2 +1,17 @@
-<h1>Clients::Products#index</h1>
-<p>Find me in app/views/clients/products/index.html.erb</p>
+<%= render 'clients/genres/index', genres: @genres %>
+<div class="col-lg-10 space">
+    <div class="container">
+    <h2>
+        <span style="display: inline-block;">商品一覧</span>
+        <span style="display: inline-block;">（<%= @products.count %>種）</span>
+    </h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+        <% @products.each do |product| %>
+            <%= render 'box', product: product %>
+        <% end %>
+        </div>
+    </div>
+</div>

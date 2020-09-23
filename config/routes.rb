@@ -33,6 +33,13 @@ Rails.application.routes.draw do
     resources :addresses, only: [:new, :create, :edit, :update, :destroy]
     resources :genres, only: [:show]
     resources :products, only: [:index, :show]
+
+    resources :cart_products, only: [:index, :create, :update, :destroy] do
+      collection do
+        delete 'destroy_all'
+      end
+    end
+
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
