@@ -1,2 +1,67 @@
-<h1>Clients::CartProducts#index</h1>
-<p>Find me in app/views/clients/cart_products/index.html.erb</p>
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box2">
+					<h3><span>ショッピングカート</span></h3>
+				</div>
+			</div>
+			<div class="col-md-offset-2 col-md-2">
+				<%= link_to "カートを空にする", destroy_all_clients_cart_products_path, method: :delete, class: "btn btn-danger form-control" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-10">
+				<table class="table table-bordered">
+					<thead>
+						<tr class="active">
+							<th>商品名</th>
+							<th>単価(税込)</th>
+							<th>数量</th>
+							<th>小計</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% sum_all = 0 %>
+						<% @cart_products.each do |cart_product| %>
+						<tr>
+							<td>
+								<%= attachment_image_tag(cart_product.product, :image, :fill, 80, 80, fallback: 'no_image.jpg') %>
+								<%= cart_product.product.name %>
+							</td>
+							<td>
+								<%= cart_product.product.price %> 円
+							</td>
+							<td>
+								<%= form_with(model: cart_product, url: clients_cart_product_path(cart_product.id), method: :patch) do |f| %>
+									<%= f.number_field :quantity, value: cart_product.quantity, min:1, max:99 %>
+									<%= f.submit "変更", class: "btn btn-primary" %>
+								<% end %>
+							</td>
+							<td>
+								<%= sum_product = cart_product.product.price * cart_product.quantity %> 円
+								<% sum_all += sum_product %>
+							</td>
+							<td>
+								<%= link_to "削除する", clients_cart_product_path(cart_product), method: :delete, class: "btn btn-danger" %>
+							</td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-offset-2 col-md-2">
+				<%= link_to "買い物を続ける", clients_products_path, class: "btn btn-primary" %>
+			</div>
+			<div class="col-md-offset-3 col-md-3">
+				<h4>合計金額:<%= sum_all %> 円</h4>
+			</div>
+		</div>
+
+	</div>
+</div>
