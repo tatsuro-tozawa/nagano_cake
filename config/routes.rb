@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :clients, only: [:index, :edit, :show, :update]
     resources :genres, only: [:new, :create, :edit, :update]
     resources :products, only: [:new, :create, :show, :index, :edit, :update]
+    resources :orders, only: [:index, :create, :show, :update]
+    resources :order_details, only: [:index, :create, :show, :update]
   end
 
   devise_for :clients, controllers: {
@@ -22,8 +24,8 @@ Rails.application.routes.draw do
   }
 
   namespace :clients do
-    get 'homes/top' => 'homes#top', as:'client_top'
-    get 'homes/about' => 'homes#about', as:'client_about'
+    get 'homes/top' => 'homes#top', as:'top'
+    get 'homes/about' => 'homes#about', as:'about'
 
     get 'mypage/edit' => 'edit'
     patch 'mypage' => 'mypage#update'
@@ -33,6 +35,10 @@ Rails.application.routes.draw do
     resources :addresses, only: [:new, :create, :edit, :update, :destroy]
     resources :genres, only: [:show]
     resources :products, only: [:index, :show]
+    resources :orders, only: [:new, :index, :create, :show]
+    post 'orders/thanks' => 'orders#thanks'
+    post 'orders/confirm' => 'orders#confirm'
+    resources :order_details, only: [:index, :create, :new]
 
     resources :cart_products, only: [:index, :create, :update, :destroy] do
       collection do

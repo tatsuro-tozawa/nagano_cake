@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  credit_card: "クレジットカード"
+  bank_transfer: "銀行振込"

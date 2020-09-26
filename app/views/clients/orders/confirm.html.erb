@@ -1,0 +1,90 @@
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box3">
+					<h3><span>注文情報確認</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<%= form_with(model: @order, url: clients_orders_thanks_path, method: :post, local: true) do |f| %>
+
+		<div class="row">
+			<div class="col-md-10">
+				<table class="table table-bordered">
+					<thead>
+						<tr class="active">
+							<th>商品名</th>
+							<th>単価(税込)</th>
+							<th>数量</th>
+							<th>小計</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% sum_all = 0 %>
+						<% @cart_products.each do |cart_product| %>
+						<tr>
+							<td>
+								<%= attachment_image_tag(cart_product.product, :image, :fill, 80, 80, fallback: 'no_image.jpg') %>
+								<%= cart_product.product.name %>
+							</td>
+							<td>
+								<%= cart_product.product.price %> 円
+							</td>
+							<td>
+								<%= cart_product.quantity %>
+							</td>
+							<td>
+								<%= sum_product = cart_product.product.price * cart_product.quantity %>
+								<% sum_all += sum_product %> 円
+							</td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-offset-8 col-md-3">
+				<h4>送料:<%= @order.postage %> 円</h4>
+				<h4>商品金額:<%= sum_all.to_i %> 円</h4>
+				<h4>ご請求金額:<% total_payment = sum_all + @order.postage.to_i %><%= total_payment.to_i %> 円</h4>
+			</div>
+		</div>
+
+		<div class="row space-sm">
+			<div class="col-md-2">
+				<h3>支払方法</h3>
+			</div>
+			<div class="col-md-4">
+				<%= @order.payment_method %>
+			</div>
+		</div>
+
+		<div class="row space-sm">
+			<div class="col-md-2">
+				<h3>お届け先</h3>
+			</div>
+			<div class="col-md-4">
+				<%= @order.postcode %>
+				<%= @order.address %>
+				<%= @order.name %>
+			</div>
+		</div>
+
+		<%= f.hidden_field :client, :value => current_client %>
+  		<%= f.hidden_field :postcode, :value => "#{@order.postcode}" %>
+  		<%= f.hidden_field :address, :value => "#{@order.address}" %>
+  		<%= f.hidden_field :name, :value => "#{@order.name}" %>
+
+  		<div class="row">
+  			<div class="col-md-offset-5 col-md-2">
+  				<%= f.submit "購入を確定する", class: "btn btn-success form-control" %>
+  			</div>
+  		</div>
+
+  	</div>
+  	<% end %>
+</div>

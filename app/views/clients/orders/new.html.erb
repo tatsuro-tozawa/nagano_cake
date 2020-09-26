@@ -1,0 +1,97 @@
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box3">
+					<h3><span>注文情報入力</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<%= form_with(model: @order, url: clients_orders_confirm_path, method: :post, local: true) do |f| %>
+
+		<div class="row">
+			<h3><strong><%= f.label :支払方法 %></strong></h3>
+		</div>
+
+		<div class="row">
+			<div class="form-field">
+				<div class="radio-inline">
+					<%= f.radio_button :payment_method, :クレジットカード, checked: "checked" %>
+					<%= f.label :クレジットカード, class: "payment_method_label" %>
+				</div>
+			</div>
+			<div class="form-field">
+				<div class="radio-inline">
+					<%= f.radio_button :payment_method, :銀行振込, checked: "checked" %>
+					<%= f.label :銀行振込, class: "payment_method_label" %>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<h3><strong><%= f.label :お届け先 %></strong></h3>
+			<p>
+				<label><%= f.radio_button :add, 1, checked: true, checked: "checked" %>ご自身の住所</label>
+				<%= @client.postcode %>
+				<%= @client.address %>
+				<%= @client.full_name %>
+			</p>
+		</div>
+
+		<div class="row">
+			<p>
+				<label><%= f.radio_button :add, 2, style: "display: inline-block" %>登録住所から選択</label><br>
+				<%= f.collection_select :address, @client.addresses, :id, :address %>
+			</p>
+		</div>
+
+		<div class="row">
+			<p><label><%= f.radio_button :add, 3 %>新しいお届け先</label></p>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<%= f.fields_for :new_add do |na| %>
+				<div class="form-horizontal">
+					<div class="form-group">
+						<div class="col-md-3">
+							<strong>郵便番号(ハイフンなし)</strong>
+						</div>
+						<div class="col-md-6">
+							<%= na.text_field :postcode, class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-3">
+							<strong>住所</strong>
+						</div>
+						<div class="col-md-6">
+							<%= na.text_field :address, class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-3">
+							<strong>宛名</strong>
+						</div>
+						<div class="col-md-6">
+							<%= na.text_field :name, class: "form-control" %>
+						</div>
+					</div>
+				</div>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-offset-4 col-md-2">
+				<%= f.submit "確認画面へ進む", class: "btn btn-primary form-control" %>
+			</div>
+		</div>
+
+		<% end %>
+		</div>
+	</div>
+</div>

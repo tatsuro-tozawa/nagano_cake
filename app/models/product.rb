@@ -3,6 +3,8 @@ class Product < ApplicationRecord
 	belongs_to :genre
 	has_many :cart_products
     has_many :clients, through: :cart_products
+    has_many :order_details
+    has_many :products, through: :order_details
 
 	attachment :image
 
