@@ -8,8 +8,6 @@
 			</div>
 		</div>
 
-		<%= form_with(model: @order, url: clients_orders_thanks_path, method: :post, local: true) do |f| %>
-
 		<div class="row">
 			<div class="col-md-10">
 				<table class="table table-bordered">
@@ -48,9 +46,9 @@
 
 		<div class="row">
 			<div class="col-md-offset-8 col-md-3">
-				<h4>送料:<%= @order.postage %> 円</h4>
-				<h4>商品金額:<%= sum_all.to_i %> 円</h4>
-				<h4>ご請求金額:<% total_payment = sum_all + @order.postage.to_i %><%= total_payment.to_i %> 円</h4>
+				<h4>送料:<% @order.postage = 800 %><%= @order.postage %> 円</h4>
+				<h4>商品金額:<%= sum_all %> 円</h4>
+				<h4>ご請求金額:<% @total_payment = sum_all + @order.postage %><%= @total_payment %> 円</h4>
 			</div>
 		</div>
 
@@ -74,10 +72,13 @@
 			</div>
 		</div>
 
-		<%= f.hidden_field :client, :value => current_client %>
-  		<%= f.hidden_field :postcode, :value => "#{@order.postcode}" %>
-  		<%= f.hidden_field :address, :value => "#{@order.address}" %>
-  		<%= f.hidden_field :name, :value => "#{@order.name}" %>
+        <%= form_with(model: @order, url: clients_orders_path, method: :post, local: true) do |f| %>
+  			<%= f.hidden_field :postcode, :value => "#{@order.postcode}" %>
+  			<%= f.hidden_field :address, :value => "#{@order.address}" %>
+  			<%= f.hidden_field :name, :value => "#{@order.name}" %>
+  			<%= f.hidden_field :total_payment, :value => "#{@total_payment}" %>
+  			<%= f.hidden_field :postage, :value => "#{@order.postage}" %>
+  			<%= f.hidden_field :payment_method, :value => "#{@order.payment_method}" %>
 
   		<div class="row">
   			<div class="col-md-offset-5 col-md-2">

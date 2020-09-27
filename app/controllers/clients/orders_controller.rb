@@ -8,7 +8,7 @@ class Clients::OrdersController < ApplicationController
   end
 
   def create
-  	if current_client.cart_details.exists?
+  	if current_client.cart_products.exists?
   		@order = Order.new(order_params)
   		@order.client = current_client
 
@@ -39,18 +39,17 @@ class Clients::OrdersController < ApplicationController
   	end
 
   	current_client.cart_products.each do |cart_product|
-  		order_detail = @order.order_details
-  		order_detail.order_id = @order.id
+  		order_detail = @order.order_details.new
   		order_detail.product_id = cart_product.product_id
   		order_detail.quantity = cart_product.quantity
   		order_detail.price = cart_product.product.price
   		order_detail.save
-  		order_detail.destroy
+  		cart_product.destroy
   	end
   	render :thanks
 
   	else
-  		redirect_to clients_client_top_path
+  		redirect_to client_top_path
   		flash[:danger] = 'カートが空です'
   	end
   end
@@ -60,6 +59,11 @@ class Clients::OrdersController < ApplicationController
   end
 
   def show
+  	@order = Order.find(params[:id])
+  	if @order.client != current_client
+  		redirect_back(fallback_location: root_path)
+  		flash[:alert] = "アクセスに失敗しました。"
+  	end
   end
 
   def confirm

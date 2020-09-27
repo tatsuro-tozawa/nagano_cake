@@ -1,2 +1,91 @@
-<h1>Clients::Orders#show</h1>
-<p>Find me in app/views/clients/orders/show.html.erb</p>
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box3">
+					<h3><span>注文履歴詳細</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<h4><strong>注文情報</strong></h4>
+				</div>
+				<table class="table table-bordered">
+					<tr>
+						<td class="active">注文日</td>
+						<td><%= @order.created_at %></td>
+					</tr>
+					<tr>
+						<td class="active">発送先</td>
+						<td><%= @order.postcode %><br>
+							<%= @order.address %><br>
+							<%= @order.name %>
+						</td>
+					</tr>
+					<tr>
+						<td class="active">支払方法</td>
+						<td><%= @order.payment_method %></td>
+					</tr>
+					<tr>
+						<td class="active">ステータス</td>
+						<td><%= @order.status %></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group">
+					<h4><strong>注文内容</strong></h4>
+				</div>
+				<table class="table table-bordered">
+					<thead>
+						<tr class="active">
+							<th>商品</th>
+							<th>単価(税込)</th>
+							<th>個数</th>
+							<th>小計</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% sum_all = 0 %>
+      					<% @order.order_details.each do |order_detail| %>
+						<tr>
+							<td><%= order_detail.product.name %></td>
+							<td><%= order_detail.product.price %> 円</td>
+							<td><%= order_detail.quantity %></td>
+							<td><%= sub_total = order_detail.product.price * order_detail.quantity %> 円</td>
+						<% sum_all += sub_total %>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col-md-offset-1 col-md-3">
+				<div class="form-group">
+					<h4><strong>請求情報</strong></h4>
+				</div>
+				<table class="table table-bordered">
+					<tr>
+						<td class="active">商品合計</td>
+						<td><%= sum_all %> 円</td>
+					</tr>
+					<tr>
+						<td class="active">配送料</td>
+						<td><% @order.postage = 800 %><%= @order.postage %> 円</td>
+					</tr>
+					<tr>
+						<td class="active">ご請求額</td>
+						<td><%= sum_all += @order.postage.to_i %> 円</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>

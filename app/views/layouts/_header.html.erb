@@ -20,12 +20,13 @@
 				<% elsif client_signed_in? %>
 					<li class="nav-item"><%= link_to 'マイページ', clients_mypage_show_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to '商品一覧', clients_products_path, class: "nav-link" %></li>
-					<li class="nav-item"><%= link_to 'カート', "#", class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'カート', clients_cart_products_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to '注文履歴一覧', clients_orders_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to 'ログアウト', destroy_client_session_path, method: :delete, class: "nav-link" %></li>
 
 				<!-- 非ログイン -->
 				<% else %>
-					<li class="nav-item"><%= link_to 'About', clients_client_about_path, class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to 'About', clients_about_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to '商品一覧', clients_products_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to '新規登録', new_client_registration_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to 'ログイン', new_client_session_path, class: "nav-link" %></li>

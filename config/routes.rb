@@ -35,9 +35,9 @@ Rails.application.routes.draw do
     resources :addresses, only: [:new, :create, :edit, :update, :destroy]
     resources :genres, only: [:show]
     resources :products, only: [:index, :show]
+    get 'orders/thanks' => 'orders#thanks'
+    get 'orders/confirm' => 'orders#confirm'
     resources :orders, only: [:new, :index, :create, :show]
-    post 'orders/thanks' => 'orders#thanks'
-    post 'orders/confirm' => 'orders#confirm'
     resources :order_details, only: [:index, :create, :new]
 
     resources :cart_products, only: [:index, :create, :update, :destroy] do
