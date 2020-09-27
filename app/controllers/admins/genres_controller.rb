@@ -1,5 +1,7 @@
 class Admins::GenresController < ApplicationController
 
+  before_action :authenticate_admin!
+
   def new
   	@genre = Genre.new
   	@genres = Genre.all
@@ -18,7 +20,7 @@ class Admins::GenresController < ApplicationController
   def update
   	@genre = Genre.find(params[:id])
   	@genre.update(genre_params)
-  	redirect_to new_admins_genre_path(@genre)
+  	redirect_to new_admins_genre_path
   end
 
   private

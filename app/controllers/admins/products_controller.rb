@@ -1,5 +1,7 @@
 class Admins::ProductsController < ApplicationController
 
+  before_action :authenticate_admin!
+
   def new
   	@product = Product.new
   	@genres = Genre.all
@@ -7,7 +9,7 @@ class Admins::ProductsController < ApplicationController
 
   def create
   	@product = Product.new(product_params)
-  	@product.save
+    @product.save
   	redirect_to admins_products_path
   end
 
@@ -21,13 +23,15 @@ class Admins::ProductsController < ApplicationController
 
   def edit
   	@product = Product.find(params[:id])
+    @admin_id != current_admin
   	@genres = Genre.all
   end
 
   def update
   	@product = Product.find(params[:id])
-  	@product.update(product_params)
-  	redirect_to admins_products_path(@product)
+    @product.update(product_params)
+    redirect_to admins_products_path
+
   end
 
   private
