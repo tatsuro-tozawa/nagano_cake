@@ -3,15 +3,17 @@
       <div class="row">
           <div class="col-md-offset-3 col-md-4">
           	<div class="box1">
-          		<h4><span>管理者画面</span></h4>
+          		<h3><span>管理者画面</span></h3>
           	</div>
           </div>
       </div>
       <div class="row">
           <div class="col-md-offset-1 col-md-3">
-          	<h4>本日の注文件数</h4>
-          </div>
-          <div class="col-md-2">
-          	<h4>件</h4>
+          	<h3>
+              <span style="display: inline-block;">本日の注文件数</span>
+              <span style="display: inline-block;">（<%= @orders.count %>件）</span>
+            </h3>
           </div>
       </div>
+  </div>
+</div>

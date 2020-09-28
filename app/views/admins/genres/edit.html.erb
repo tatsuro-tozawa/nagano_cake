@@ -16,10 +16,10 @@
 					</div>
 				</div>
 				<div class="col-md-1">
-					<input type="radio" name="is_active" value="有効">有効
+					<label><%= f.radio_button :is_active, "true" %>有効</label>
 				</div>
 				<div class="col-md-1">
-					<input type="radio" name="is_active" value="無効">無効
+					<label><%= f.radio_button :is_active, "false" %>無効</label>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group">

@@ -1,2 +1,70 @@
-<h1>Admins::Clients#show</h1>
-<p>Find me in app/views/admins/clients/show.html.erb</p>
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box2">
+					<h3><span><%= @client.last_name %><%= @client.first_name %> さんの会員詳細</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2 text-left">
+				<div class="form-group">
+					<h4>顧客ID</h4>
+				</div>
+				<div class="form-group">
+					<h4>氏名</h4>
+				</div>
+				<div class="form-group">
+					<h4>フリガナ</h4>
+				</div>
+				<div class="form-group">
+					<h4>郵便番号</h4>
+				</div>
+				<div class="form-group">
+					<h4>住所</h4>
+				</div>
+				<div class="form-group">
+					<h4>電話番号</h4>
+				</div>
+				<div class="form-group">
+					<h4>メールアドレス</h4>
+				</div>
+			</div>
+
+			<div class="col-md-6 text-left">
+				<div class="form-group">
+					<h4><%= @client.id %></h4>
+				</div>
+				<div class="form-group">
+					<h4><%= @client.last_name %> <%= @client.first_name %></h4>
+				</div>
+				<div class="form-group">
+					<h4><%= @client.last_name_kana %> <%= @client.first_name_kana %></h4>
+				</div>
+				<div class="form-group">
+					<h4><%= @client.postcode %></h4>
+				</div>
+				<div class="form-group">
+					<h4><%= @client.address %></h4>
+				</div>
+				<div class="form-group">
+					<h4><%= @client.telephone_number %></h4>
+				</div>
+				<div class="form-group">
+					<h4><%= @client.email %></h4>
+				</div>
+			</div>
+		</div>
+
+		<div class="row"><br>
+			<div class="col-md-2">
+					<%= link_to "編集する", edit_admins_client_path, class: "btn btn-primary form-control" %>
+			</div>
+			<div class="col-md-3">
+					<%= link_to "注文履歴一覧を見る", admins_orders_path, class: " btn btn-primary form-control" %>
+			</div>
+		</div>
+	</div>
+</div>
