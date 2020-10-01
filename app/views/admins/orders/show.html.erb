@@ -1,2 +1,109 @@
-<h1>Admins::Orders#show</h1>
-<p>Find me in app/views/admins/orders/show.html.erb</p>
+<div class="form-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-5">
+				<div class="box2">
+					<h3><span>注文履歴詳細</span></h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-7">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<div class="col-md-3">
+							<h4>購入者</h4>
+						</div>
+						<div class="col-md-2">
+							<h4><%= @order.client.last_name %><%= @order.client.first_name %></h4>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-3">
+							<h4>配送先</h4>
+						</div>
+						<div class="col-md-9">
+							<h4>〒<%= @order.postcode %><%= @order.address %><%= @order.name %></h4>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-3">
+							<h4>支払方法</h4>
+						</div>
+						<div class="col-md-2">
+							<h4><%= @order.payment_method %></h4>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-3">
+							<h4>注文ステータス</h4>
+						</div>
+							<%= form_for(@order, url:admins_order_path) do |f| %>
+							<div class="col-md-4">
+								<%= f.select :status, [["入金待ち", "入金待ち"], ["入金確認", "入金確認"], ["製作中", "製作中"], ["発送準備中", "発送準備中"], ["発送済み", "発送済み"]], {include_blank: "選択して下さい"}, class: "form-control" %>
+							</div>
+							<div class="col-md-2">
+								<%= f.submit "更新", class: "btn btn-primary form-control" %>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8">
+				<table class="table table-bordered">
+					<thead>
+						<tr class="active">
+							<th>商品名</th>
+							<th>単価(税込)</th>
+							<th>個数</th>
+							<th>小計</th>
+							<th>製作ステータス</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% sum_all = 0 %>
+      					<% @order.order_details.each do |order_detail| %>
+						<tr>
+							<td><%= order_detail.product.name %></td>
+							<td><%= order_detail.product.price %> 円</td>
+							<td><%= order_detail.quantity %></td>
+							<td><%= sub_total = order_detail.product.price * order_detail.quantity %> 円</td>
+							<% sum_all += sub_total %>
+							<%= form_for(order_detail, url:admins_order_detail_path) do |f| %>
+							<td>
+								<%= f.select :production_status, [["製作不可", "製作不可"], ["製作待ち", "製作待ち"], ["製作中", "製作中"], ["製作完了", "製作完了"]], {include_blank: "選択して下さい"}, class: "form-control" %>
+							</td>
+							<td>
+								<%= f.submit "更新", class: "btn btn-primary" %>
+							</td>
+							<% end %>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col-md-offset-1 col-md-3">
+				<table class="table table-bordered">
+					<tr>
+						<td class="active">商品合計</td>
+						<td><%= sum_all %> 円</td>
+					</tr>
+					<tr>
+						<td class="active">配送料</td>
+						<td><% @order.postage = 800 %><%= @order.postage %> 円</td>
+					</tr>
+					<tr>
+						<td class="active">請求額金額合計</td>
+						<td><%= sum_all += @order.postage.to_i %> 円</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

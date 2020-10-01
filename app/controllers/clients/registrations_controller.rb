@@ -13,7 +13,7 @@ class Clients::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    clients_client_top_path
+    clients_top_path
   end
 
 

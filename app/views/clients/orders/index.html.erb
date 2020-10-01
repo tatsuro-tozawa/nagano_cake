@@ -24,7 +24,7 @@
 					<tbody>
 						<% @orders.each do |order| %>
 						<tr>
-							<td><%= order.created_at %></td>
+							<td><%= order.created_at.to_s(:datetime_jp) %></td>
 							<td><%= order.postcode + " " + order.address + " " + order.name %></td>
 							<% sum_all = 0 %>
 							<% order.order_details.each do |order_detail| %>

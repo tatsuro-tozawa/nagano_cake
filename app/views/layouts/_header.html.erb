@@ -1,7 +1,7 @@
 <header class="container-fluid">
 	<nav class="navbar navbar-default">
 		<div>
-			<h1>LOGO</h1>
+			<h1>Nagano Cake</h1>
 		</div>
 
 		<div class="collapse navbar-collapse">
@@ -12,12 +12,13 @@
 					<div class="admin-message">管理者としてログインしています</div>
 					<li class="nav-item"><%= link_to "商品一覧", admins_products_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to "会員一覧", admins_clients_path, class: "nav-link" %></li>
-					<li class="nav-item"><%= link_to "注文履歴一覧", "#", class: "nav-link" %></li>
+					<li class="nav-item"><%= link_to "注文履歴一覧", admins_orders_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to "ジャンル一覧", new_admins_genre_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %></li>
 
 				<!-- 顧客 -->
 				<% elsif client_signed_in? %>
+					<li class="nav-item"><%= link_to 'TOP', clients_top_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to 'マイページ', clients_mypage_show_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to '商品一覧', clients_products_path, class: "nav-link" %></li>
 					<li class="nav-item"><%= link_to 'カート', clients_cart_products_path, class: "nav-link" %></li>

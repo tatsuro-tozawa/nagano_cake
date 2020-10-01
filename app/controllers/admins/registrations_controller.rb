@@ -7,13 +7,15 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_sign_in_path_for(resouse)
-    admins_top_path
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:password])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:password])
   end
 
-  def after_sign_out_path_for(resouse)
-    admin_session_path
+  def after_sign_up_path_for(resource)
+    admin_top_path
   end
+
 
   end
   # before_action :configure_sign_up_params, only: [:create]
